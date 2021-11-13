@@ -1,6 +1,13 @@
 package com.coffeeRecipeApp.codewithA.N.Entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Instruction {
+
+    @Id
     int instructionId;
     String instructionText;
 

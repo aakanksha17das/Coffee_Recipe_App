@@ -3,6 +3,7 @@ package com.coffeeRecipeApp.codewithA.N.Entity;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -40,6 +41,17 @@ public class Recipe {
    private float intakeAmount;
 
    private String caffineAmountLabel;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Instruction> instructions = new ArrayList<>();
+
+    public List<Instruction> getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(List<Instruction> instructions) {
+        this.instructions = instructions;
+    }
 
     public float getIntakeAmount() {
         return intakeAmount;
