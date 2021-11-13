@@ -19,7 +19,7 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @GetMapping("/recipes")
-    public ResponseEntity getRecipeList(){
+    public ResponseEntity getRecipeList() {
         List<Recipe> recipes = recipeService.getAllRecipes();
 
         // Creating a response map
@@ -30,18 +30,28 @@ public class RecipeController {
     }
 
     @PostMapping("/recipe/save")
-    public void createRecipe(@RequestBody Recipe recipe){
+    public void createRecipe(@RequestBody Recipe recipe) {
         recipeService.addRecipe(recipe);
     }
 
     @GetMapping("/recipes/trending")
-    public List<Recipe> fetchTrendingRecipes(){
-        return recipeService.getTrendingRecipes();
+    public ResponseEntity<Object> fetchTrendingRecipes() {
+        List<Recipe> trendingRecipes = recipeService.getTrendingRecipes();
+        Map<String, Object> response = new HashMap<>();
+        response.put("trendingRecipes", trendingRecipes);
+        return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
 
     @GetMapping("/recipes/latest")
-    public List<Recipe> fetchLatestRecipes(){
-        return recipeService.getNewestRecipes();
+    public ResponseEntity<Object> fetchLatestRecipes() {
+        List<Recipe> latestRecipes = recipeService.getNewestRecipes();
+        if (latestRecipes.size() > 0) {
+            Map<String, Object> responseBody = new HashMap<>();
+            responseBody.put("latestRecipes", latestRecipes);
+            return new ResponseEntity<Object>(responseBody, HttpStatus.OK);
+        }
+        return new ResponseEntity<>("NO LATEST RECIPES !!",HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 
 }
