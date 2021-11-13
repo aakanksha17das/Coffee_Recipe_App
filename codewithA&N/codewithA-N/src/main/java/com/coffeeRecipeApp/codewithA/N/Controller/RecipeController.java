@@ -4,9 +4,13 @@ import com.coffeeRecipeApp.codewithA.N.Entity.Recipe;
 import com.coffeeRecipeApp.codewithA.N.Service.RecipeService;
 import com.coffeeRecipeApp.codewithA.N.Service.RecipeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController 
 public class RecipeController {
@@ -15,8 +19,14 @@ public class RecipeController {
     private RecipeService recipeService;
 
     @GetMapping("/recipes")
-    public List<Recipe> getRecipeList(){
-        return recipeService.getAllRecipes();
+    public ResponseEntity getRecipeList(){
+        List<Recipe> recipes = recipeService.getAllRecipes();
+
+        // Creating a response map
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("recipies", recipes);
+
+        return new ResponseEntity(responseMap, HttpStatus.OK);
     }
 
     @PostMapping("/recipe/save")
