@@ -42,7 +42,7 @@ public class BaristaController {
         List<Barista> topBaristas = baristaService.getTopBaristas();
         if(topBaristas.size() > 0){
             Map<String,Object> responseBody = new HashMap<>();
-            responseBody.put("topBaristas",topBaristas);
+            responseBody.put("baristas",topBaristas);
             return new ResponseEntity<Object>(responseBody,HttpStatus.OK);
         }
         return new ResponseEntity<Object>("No Top Baristas!!",HttpStatus.INTERNAL_SERVER_ERROR);

@@ -5,6 +5,8 @@ import com.coffeeRecipeApp.codewithA.N.Entity.Recipe;
 import com.coffeeRecipeApp.codewithA.N.Repository.RecipeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import java.util.*;
 
@@ -13,6 +15,9 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Autowired
     RecipeRepo recipeRepo;
+
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+
 
     @Override
     public List<Recipe> getAllRecipes(){
@@ -29,6 +34,7 @@ public class RecipeServiceImpl implements RecipeService {
             caffineAmountLabel = "MEDIUM";
         else if(intake > 100.0)
             caffineAmountLabel = "LARGE";
+        recipe.setCaffineAmountLabel(caffineAmountLabel);
 
         List<Instruction> instructionList = new ArrayList<>();
 //        Instruction instruction = new Instruction(1,"Go through the ingredient list");
@@ -36,9 +42,25 @@ public class RecipeServiceImpl implements RecipeService {
 
 //        instructionList.add(instruction);
 //        instructionList.add(instruction2);
-        recipe.setInstructions(instructionList);
+          recipe.setInstructions(instructionList);
 
-        recipe.setCaffineAmountLabel(caffineAmountLabel);
+            double sum = 0.0;
+            double avg = 0.0;
+
+            List<Double> avgRating = recipe.getRatingsList();
+            if (avgRating.size() > 0) {
+                    for (Double rating :
+                            avgRating) {
+                        sum += rating;
+                    }
+                    avg = sum / avgRating.size();
+                    //Rounding Off To 2 decimal places
+                    double roundOffAvg = Math.round(avg * 100.00) / 100.00;
+                    recipe.setCurrentRating(roundOffAvg);
+
+
+            }
+
         this.recipeRepo.save(recipe);
     }
 

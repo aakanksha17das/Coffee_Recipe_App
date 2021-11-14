@@ -36,7 +36,7 @@ public class Recipe {
     private Set<String> labels;
 
     @ElementCollection
-    private List<Float> ratingsList;
+    private List<Double> ratingsList;
 
     private float intakeAmount;
 
@@ -69,11 +69,11 @@ public class Recipe {
         this.caffineAmountLabel = caffineAmountLabel;
     }
 
-    public List<Float> getRatingsList() {
+    public List<Double> getRatingsList() {
         return ratingsList;
     }
 
-    public void setRatingsList(List<Float> ratingsList) {
+    public void setRatingsList(List<Double> ratingsList) {
         this.ratingsList = ratingsList;
     }
 
@@ -117,8 +117,8 @@ public class Recipe {
         this.currentRating = currentRating;
     }
 
-    public void setBookMarked(boolean bookMarked) {
-        isBookMarked = bookMarked;
+    public void setBookMarked(boolean isBookMarked) {
+        isBookMarked = isBookMarked;
     }
 
     public void setImageUrl(String imageUrl) {
@@ -192,7 +192,7 @@ public class Recipe {
     public Recipe(){
     }
 
-    public Recipe(int recipeId, String title, String description, String sourceBarista, String sourceBaristaId, double currentRating, boolean isBookMarked, String imageUrl, int timeToMake, String brewType, Date publishedDate, int calories, Set<String> ingredients, Set<String> labels, List<Float> ratingsList, float intakeAmount, String caffineAmountLabel) {
+    public Recipe(int recipeId, String title, String description, String sourceBarista, String sourceBaristaId, double currentRating, boolean isBookMarked, String imageUrl, int timeToMake, String brewType, Date publishedDate, int calories, Set<String> ingredients, Set<String> labels, List<Double> ratingsList, float intakeAmount, String caffineAmountLabel) {
         this.recipeId = recipeId;
         this.title = title;
         this.description = description;

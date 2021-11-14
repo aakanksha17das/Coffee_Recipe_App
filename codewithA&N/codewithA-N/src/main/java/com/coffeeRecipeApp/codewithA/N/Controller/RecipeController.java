@@ -24,7 +24,7 @@ public class RecipeController {
 
         // Creating a response map
         Map<String, Object> responseMap = new HashMap<>();
-        responseMap.put("recipies", recipes);
+        responseMap.put("recipes", recipes);
 
         return new ResponseEntity(responseMap, HttpStatus.OK);
     }
@@ -38,7 +38,7 @@ public class RecipeController {
     public ResponseEntity<Object> fetchTrendingRecipes() {
         List<Recipe> trendingRecipes = recipeService.getTrendingRecipes();
         Map<String, Object> response = new HashMap<>();
-        response.put("trendingRecipes", trendingRecipes);
+        response.put("recipes", trendingRecipes);
         return new ResponseEntity<Object>(response, HttpStatus.OK);
     }
 
@@ -47,7 +47,7 @@ public class RecipeController {
         List<Recipe> latestRecipes = recipeService.getNewestRecipes();
         if (latestRecipes.size() > 0) {
             Map<String, Object> responseBody = new HashMap<>();
-            responseBody.put("latestRecipes", latestRecipes);
+            responseBody.put("recipes", latestRecipes);
             return new ResponseEntity<Object>(responseBody, HttpStatus.OK);
         }
         return new ResponseEntity<>("NO LATEST RECIPES !!",HttpStatus.INTERNAL_SERVER_ERROR);
