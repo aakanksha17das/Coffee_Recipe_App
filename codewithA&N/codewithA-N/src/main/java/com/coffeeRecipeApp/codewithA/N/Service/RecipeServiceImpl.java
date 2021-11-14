@@ -31,10 +31,11 @@ public class RecipeServiceImpl implements RecipeService {
             caffineAmountLabel = "LARGE";
 
         List<Instruction> instructionList = new ArrayList<>();
-        Instruction instruction = new Instruction(1,"Go through the ingredient list");
-        Instruction instruction2 = new Instruction(2,"Heat Some Milk In A Pan");
-        instructionList.add(instruction);
-        instructionList.add(instruction2);
+//        Instruction instruction = new Instruction(1,"Go through the ingredient list");
+//        Instruction instruction2 = new Instruction(2,"Heat Some Milk In A Pan");
+
+//        instructionList.add(instruction);
+//        instructionList.add(instruction2);
         recipe.setInstructions(instructionList);
 
         recipe.setCaffineAmountLabel(caffineAmountLabel);

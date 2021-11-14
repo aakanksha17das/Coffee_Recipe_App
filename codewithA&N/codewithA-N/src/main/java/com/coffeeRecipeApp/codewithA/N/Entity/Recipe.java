@@ -38,9 +38,9 @@ public class Recipe {
     @ElementCollection
     private List<Float> ratingsList;
 
-   private float intakeAmount;
+    private float intakeAmount;
 
-   private String caffineAmountLabel;
+    private String caffineAmountLabel;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Instruction> instructions = new ArrayList<>();
