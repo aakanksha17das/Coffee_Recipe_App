@@ -18,10 +18,34 @@ public class RecipeServiceImpl implements RecipeService {
 
     private static final DecimalFormat df = new DecimalFormat("0.00");
 
-
     @Override
     public List<Recipe> getAllRecipes(){
         return recipeRepo.findAll();
+    }
+
+    @Override
+    public Recipe getRecipeWithId(Integer recipeId) {
+        Optional<Recipe> recipe = recipeRepo.findById(recipeId);
+
+        if(!recipe.isPresent()) return null;
+
+        return recipe.get();
+    }
+
+    // Returns a list of recipes that conform to the query parameters passed in
+    @Override
+    public List<Recipe> getRecipesWithQueries(String name) {
+        List<Recipe> allRecipes = this.recipeRepo.findAll();
+        List<Recipe> recipes = new ArrayList<Recipe>();
+
+        if(name != null) {
+            for(Recipe recipe: allRecipes){
+                if(recipe.getTitle().equals(name))
+                    recipes.add(recipe);
+            }
+        }
+
+        return recipes;
     }
 
     @Override
